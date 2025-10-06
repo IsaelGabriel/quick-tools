@@ -1,5 +1,7 @@
+@icon("res://addons/quicktools/thirdparty/kenney_board-game-icons/Vector/Icons/arrow_right_curve.svg")
 extends Node
 class_name State ## A state to be used in the StateMachine.
+
 
 signal _attempt_transition(from: State, to: StringName)
 
