@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://die30vybygnar"]
+[gd_scene load_steps=3 format=3 uid="uid://die30vybygnar"]
 
 [ext_resource type="Script" uid="uid://di45ryww68w4o" path="res://addons/quicktools/scripts/camera/camera_tester.gd" id="1_0cley"]
+
+[sub_resource type="GDScript" id="GDScript_0cley"]
+script/source = "extends SpinBox
+
+class_name FloatSpinBox
+"
 
 [node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("shake_fade_toggle", "shake_strength", "shake_duration", "follow_target_selectable", "follow_speed")]
 script = ExtResource("1_0cley")
@@ -8,7 +14,7 @@ shake_fade_toggle = NodePath("LinesContainer/ShakeContainer/VBoxContainer/FadeTo
 shake_strength = NodePath("LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer/SpinBox")
 shake_duration = NodePath("LinesContainer/ShakeContainer/VBoxContainer/DurationContainer/SpinBox")
 follow_target_selectable = NodePath("LinesContainer/MovementContainer/VBoxContainer/TargetContainer/OptionButton")
-follow_speed = NodePath("LinesContainer/MovementContainer/VBoxContainer/SpeedContainer/SpinBox")
+follow_speed = NodePath("")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -38,7 +44,10 @@ text = "Strength"
 
 [node name="SpinBox" type="SpinBox" parent="LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer"]
 layout_mode = 2
+step = 0.001
+page = 0.05
 value = 30.0
+custom_arrow_step = 0.5
 
 [node name="DurationContainer" type="HBoxContainer" parent="LinesContainer/ShakeContainer/VBoxContainer"]
 layout_mode = 2
@@ -49,7 +58,10 @@ text = "Duration (s)"
 
 [node name="SpinBox" type="SpinBox" parent="LinesContainer/ShakeContainer/VBoxContainer/DurationContainer"]
 layout_mode = 2
+step = 0.001
+page = 0.05
 value = 1.0
+custom_arrow_step = 0.05
 
 [node name="FadeToggle" type="CheckButton" parent="LinesContainer/ShakeContainer/VBoxContainer"]
 layout_mode = 2
@@ -79,7 +91,11 @@ text = "Speed"
 
 [node name="SpinBox" type="SpinBox" parent="LinesContainer/MovementContainer/VBoxContainer/SpeedContainer"]
 layout_mode = 2
+step = 0.001
+page = 0.05
 value = 1.0
+script = SubResource("GDScript_0cley")
+metadata/_custom_type_script = "uid://dumiiqgbb3tru"
 
 [node name="TargetContainer" type="HBoxContainer" parent="LinesContainer/MovementContainer/VBoxContainer"]
 layout_mode = 2

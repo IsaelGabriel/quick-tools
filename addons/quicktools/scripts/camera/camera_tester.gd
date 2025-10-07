@@ -15,6 +15,8 @@ func _ready():
 	_fetch_2d_nodes()
 
 func _fetch_2d_nodes() -> void:
+	if not get_tree():
+		return
 	targetable_nodes = []
 	follow_target_selectable.clear()
 	follow_target_selectable.add_item("< null >")
@@ -25,6 +27,10 @@ func _fetch_2d_nodes() -> void:
 		if node is Node2D:
 			targetable_nodes.append(node)
 			follow_target_selectable.add_item(current_scene.get_path_to(node))
+	
+	current_scene.child_entered_tree.connect(_fetch_2d_nodes)
+	current_scene.child_exiting_tree.connect(_fetch_2d_nodes)
+	current_scene.child_order_changed.connect(_fetch_2d_nodes)
 
 func _get_nodes_in_scene(scene:Node) -> Array[Node]:
 	var nodes: Array[Node] = []
