@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://di45ryww68w4o" path="res://addons/quicktools/scripts/camera/camera_tester.gd" id="1_0cley"]
 
-[node name="CameraTester" type="CanvasLayer"]
+[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("fade_toggle")]
 script = ExtResource("1_0cley")
+fade_toggle = NodePath("LinesContainer/FadeToggle")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -14,6 +15,10 @@ offset_bottom = 90.0
 [node name="Label" type="Label" parent="LinesContainer"]
 layout_mode = 2
 text = "Camera Tester"
+
+[node name="FadeToggle" type="CheckButton" parent="LinesContainer"]
+layout_mode = 2
+text = "Fade"
 
 [node name="StartShakeButton" type="Button" parent="LinesContainer"]
 layout_mode = 2
