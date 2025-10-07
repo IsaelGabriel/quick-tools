@@ -4,9 +4,9 @@
 
 [node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("fade_toggle", "strength_text", "duration_text")]
 script = ExtResource("1_0cley")
-fade_toggle = NodePath("LinesContainer/FadeToggle")
-strength_text = NodePath("LinesContainer/StrengthContainer/LineEdit")
-duration_text = NodePath("LinesContainer/DurationContainer/LineEdit")
+fade_toggle = NodePath("LinesContainer/ShakeContainer/VBoxContainer/FadeToggle")
+strength_text = NodePath("LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer/LineEdit")
+duration_text = NodePath("LinesContainer/ShakeContainer/VBoxContainer/DurationContainer/LineEdit")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -18,14 +18,21 @@ offset_bottom = 90.0
 layout_mode = 2
 text = "Camera Tester"
 
-[node name="StrengthContainer" type="HBoxContainer" parent="LinesContainer"]
+[node name="ShakeContainer" type="FoldableContainer" parent="LinesContainer"]
+layout_mode = 2
+title = "Shake"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/ShakeContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LinesContainer/StrengthContainer"]
+[node name="StrengthContainer" type="HBoxContainer" parent="LinesContainer/ShakeContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer"]
 layout_mode = 2
 text = "Strength"
 
-[node name="LineEdit" type="LineEdit" parent="LinesContainer/StrengthContainer"]
+[node name="LineEdit" type="LineEdit" parent="LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer"]
 layout_mode = 2
 placeholder_text = "30.0"
 alignment = 1
@@ -37,14 +44,14 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="DurationContainer" type="HBoxContainer" parent="LinesContainer"]
+[node name="DurationContainer" type="HBoxContainer" parent="LinesContainer/ShakeContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LinesContainer/DurationContainer"]
+[node name="Label" type="Label" parent="LinesContainer/ShakeContainer/VBoxContainer/DurationContainer"]
 layout_mode = 2
 text = "Duration (s)"
 
-[node name="LineEdit" type="LineEdit" parent="LinesContainer/DurationContainer"]
+[node name="LineEdit" type="LineEdit" parent="LinesContainer/ShakeContainer/VBoxContainer/DurationContainer"]
 layout_mode = 2
 placeholder_text = "1.0"
 alignment = 1
@@ -56,12 +63,12 @@ shortcut_keys_enabled = false
 middle_mouse_paste_enabled = false
 drag_and_drop_selection_enabled = false
 
-[node name="FadeToggle" type="CheckButton" parent="LinesContainer"]
+[node name="FadeToggle" type="CheckButton" parent="LinesContainer/ShakeContainer/VBoxContainer"]
 layout_mode = 2
 text = "Fade"
 
-[node name="StartShakeButton" type="Button" parent="LinesContainer"]
+[node name="StartShakeButton" type="Button" parent="LinesContainer/ShakeContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start Shake"
 
-[connection signal="pressed" from="LinesContainer/StartShakeButton" to="." method="_on_start_shake_button_pressed"]
+[connection signal="pressed" from="LinesContainer/ShakeContainer/VBoxContainer/StartShakeButton" to="." method="_on_start_shake_button_pressed"]
