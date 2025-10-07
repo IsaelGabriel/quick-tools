@@ -107,4 +107,5 @@ text = "Target"
 layout_mode = 2
 
 [connection signal="pressed" from="LinesContainer/ShakeContainer/VBoxContainer/StartShakeButton" to="." method="_on_start_shake_button_pressed"]
+[connection signal="value_changed" from="LinesContainer/MovementContainer/VBoxContainer/SpeedContainer/SpinBox" to="." method="_on_follow_speed_value_changed"]
 [connection signal="item_selected" from="LinesContainer/MovementContainer/VBoxContainer/TargetContainer/OptionButton" to="." method="_on_follow_target_selected"]

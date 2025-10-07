@@ -52,3 +52,8 @@ func _on_follow_target_selected(index: int) -> void:
 		QuickCamera2D.main_camera_stop_follow()
 	else:
 		QuickCamera2D.main_camera_start_follow(targetable_nodes.get(index - 1), follow_speed.value)
+
+
+func _on_follow_speed_value_changed(value: float) -> void:
+	if follow_target_selectable.selected != 0:
+		QuickCamera2D.main_camera_start_follow(targetable_nodes.get(follow_target_selectable.selected - 1), value)
