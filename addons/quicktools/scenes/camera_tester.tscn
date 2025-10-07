@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://di45ryww68w4o" path="res://addons/quicktools/scripts/camera/camera_tester.gd" id="1_0cley"]
 
-[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("fade_toggle")]
+[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("fade_toggle", "strength_text")]
 script = ExtResource("1_0cley")
 fade_toggle = NodePath("LinesContainer/FadeToggle")
+strength_text = NodePath("LinesContainer/StrengthContainer/LineEdit")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -19,6 +20,25 @@ text = "Camera Tester"
 [node name="FadeToggle" type="CheckButton" parent="LinesContainer"]
 layout_mode = 2
 text = "Fade"
+
+[node name="StrengthContainer" type="HBoxContainer" parent="LinesContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LinesContainer/StrengthContainer"]
+layout_mode = 2
+text = "Strength"
+
+[node name="LineEdit" type="LineEdit" parent="LinesContainer/StrengthContainer"]
+layout_mode = 2
+placeholder_text = "350.0"
+alignment = 1
+max_length = 5
+context_menu_enabled = false
+emoji_menu_enabled = false
+clear_button_enabled = true
+shortcut_keys_enabled = false
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="StartShakeButton" type="Button" parent="LinesContainer"]
 layout_mode = 2
