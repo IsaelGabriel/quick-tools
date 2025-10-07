@@ -11,6 +11,8 @@ extends Node
 @export var follow_speed: SpinBox
 var targetable_nodes: Array[Node2D] = []
 
+var current_scene: Node
+
 func _ready():
 	_fetch_2d_nodes()
 
@@ -21,16 +23,19 @@ func _fetch_2d_nodes() -> void:
 	follow_target_selectable.clear()
 	follow_target_selectable.add_item("< null >")
 	
-	var current_scene = get_tree().current_scene
+	var new_current_scene = get_tree().current_scene
+	if new_current_scene != current_scene:
+		current_scene = new_current_scene
+		current_scene.child_entered_tree.connect(_fetch_2d_nodes)
+		current_scene.child_exiting_tree.connect(_fetch_2d_nodes)
+		current_scene.child_order_changed.connect(_fetch_2d_nodes)
+		
 	var nodes: Array[Node] = _get_nodes_in_scene(current_scene)
 	for node in nodes:
 		if node is Node2D:
 			targetable_nodes.append(node)
 			follow_target_selectable.add_item(current_scene.get_path_to(node))
 	
-	current_scene.child_entered_tree.connect(_fetch_2d_nodes)
-	current_scene.child_exiting_tree.connect(_fetch_2d_nodes)
-	current_scene.child_order_changed.connect(_fetch_2d_nodes)
 
 func _get_nodes_in_scene(scene:Node) -> Array[Node]:
 	var nodes: Array[Node] = []
