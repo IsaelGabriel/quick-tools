@@ -5,7 +5,7 @@ Godot addon for common game functionality to save time.
 
 ## Addon
 
-	Addon by _[@grandeisa](https://grandeisa.itch.io/).
+	Addon by [@grandeisa](https://grandeisa.itch.io/).
 
 ## Assets
 
