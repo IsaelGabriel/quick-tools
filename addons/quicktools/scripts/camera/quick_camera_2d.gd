@@ -16,7 +16,12 @@ var _shake_fade: bool = false
 var _shake_strength: float = 0.0
 var _current_shake_strength: float = 0.0
 var _shake_duration: float
+#endregion
 
+#region FOLLOW_VARIABLES
+var _follow_target: Node2D
+var _follow_speed: float = 1.0
+var _following: bool = false
 #endregion
 
 func _ready() -> void:
@@ -28,8 +33,9 @@ func _ready() -> void:
 	
 	_shake_ready()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	_process_shake()
+	_process_follow(delta)
 
 func _exit_tree() -> void:
 	if get_viewport().get_camera_2d() == self:
@@ -70,4 +76,33 @@ func _on_shake_timer_timeout() -> void:
 func _random_shake_offset() -> Vector2:
 	return Vector2(randf_range(-_current_shake_strength, _current_shake_strength), \
 					randf_range(-_current_shake_strength, _current_shake_strength))
+#endregion
+
+#region FOLLOW
+func start_follow(target: Node2D, speed: float = 1.0) -> void:
+	if not target: 
+		return
+	_following = true
+	_follow_target = target
+	_follow_speed = speed
+
+func stop_follow() -> void:
+	_following = false
+
+static func main_camera_start_follow(target: Node2D, speed: float = 1.0) -> void:
+	if not main_camera:
+		return
+	main_camera.start_follow(target, speed)
+	
+static func main_camera_stop_follow() -> void:
+	if not main_camera:
+		return
+	main_camera.stop_follow()
+	
+func _process_follow(delta: float) -> void:
+	if not _following:
+		return
+	
+	position = lerp(position, _follow_target.position, delta * _follow_speed)
+	
 #endregion
