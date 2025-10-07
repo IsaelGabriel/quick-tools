@@ -75,9 +75,11 @@ text = "Start Shake"
 
 [node name="FollowContainer" type="FoldableContainer" parent="LinesContainer"]
 layout_mode = 2
+folded = true
 title = "Follow"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/FollowContainer"]
+visible = false
 layout_mode = 2
 
 [node name="SpeedContainer" type="HBoxContainer" parent="LinesContainer/FollowContainer/VBoxContainer"]
@@ -109,9 +111,11 @@ layout_mode = 2
 
 [node name="ZoomContainer" type="FoldableContainer" parent="LinesContainer"]
 layout_mode = 2
+folded = true
 title = "Zoom"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/ZoomContainer"]
+visible = false
 layout_mode = 2
 
 [node name="ZoomSpeedContainer" type="HBoxContainer" parent="LinesContainer/ZoomContainer/VBoxContainer"]
