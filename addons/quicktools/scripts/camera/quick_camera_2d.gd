@@ -5,7 +5,6 @@ static var main_camera: QuickCamera2D
 
 #region TESTER_VARIABLES
 @export_category("Testing")
-@export var camera_test_ui: bool = false
 @onready var _camera_tester_prefab: PackedScene = preload("res://addons/quicktools/scenes/camera_tester.tscn")
 #endregion
 
@@ -23,7 +22,7 @@ var _shake_duration: float
 func _ready() -> void:
 	if get_viewport().get_camera_2d() == self:
 		main_camera = self
-	if camera_test_ui:
+	if QuickTools.show_camera_tester_ui:
 		var tester = _camera_tester_prefab.instantiate()
 		get_tree().current_scene.add_child.call_deferred(tester)
 	

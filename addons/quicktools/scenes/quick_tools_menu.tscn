@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4icooouevdkh"]
+
+[ext_resource type="Script" uid="uid://bd3gf4x0852jb" path="res://addons/quicktools/scripts/menu/quick_tools_menu.gd" id="1_guoc2"]
+
+[node name="QuickTools" type="VBoxContainer" node_paths=PackedStringArray("show_camera_toggle")]
+script = ExtResource("1_guoc2")
+show_camera_toggle = NodePath("ShowCameraTesterCheckBox")
+
+[node name="ShowCameraTesterCheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+text = "Show QuickCamera2D tester"
+
+[connection signal="toggled" from="ShowCameraTesterCheckBox" to="." method="_on_show_camera_tester_check_box_toggled"]
