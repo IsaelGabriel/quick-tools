@@ -103,6 +103,6 @@ func _process_follow(delta: float) -> void:
 	if not _following:
 		return
 	
-	position = lerp(position, _follow_target.position, delta * _follow_speed)
+	global_position = lerp(global_position, _follow_target.global_position, delta * _follow_speed)
 	
 #endregion
