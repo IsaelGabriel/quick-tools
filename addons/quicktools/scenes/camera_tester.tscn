@@ -14,7 +14,7 @@ shake_fade_toggle = NodePath("LinesContainer/ShakeContainer/VBoxContainer/FadeTo
 shake_strength = NodePath("LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer/SpinBox")
 shake_duration = NodePath("LinesContainer/ShakeContainer/VBoxContainer/DurationContainer/SpinBox")
 follow_target_selectable = NodePath("LinesContainer/MovementContainer/VBoxContainer/TargetContainer/OptionButton")
-follow_speed = NodePath("")
+follow_speed = NodePath("LinesContainer/MovementContainer/VBoxContainer/SpeedContainer/SpinBox")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -95,7 +95,6 @@ step = 0.001
 page = 0.05
 value = 1.0
 script = SubResource("GDScript_0cley")
-metadata/_custom_type_script = "uid://dumiiqgbb3tru"
 
 [node name="TargetContainer" type="HBoxContainer" parent="LinesContainer/MovementContainer/VBoxContainer"]
 layout_mode = 2
