@@ -8,13 +8,15 @@ script/source = "extends SpinBox
 class_name FloatSpinBox
 "
 
-[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("shake_fade_toggle", "shake_strength", "shake_duration", "follow_target_selectable", "follow_speed")]
+[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("shake_fade_toggle", "shake_strength", "shake_duration", "follow_target_selectable", "follow_speed", "zoom_speed", "zoom_ammount")]
 script = ExtResource("1_0cley")
 shake_fade_toggle = NodePath("LinesContainer/ShakeContainer/VBoxContainer/FadeToggle")
 shake_strength = NodePath("LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer/SpinBox")
 shake_duration = NodePath("LinesContainer/ShakeContainer/VBoxContainer/DurationContainer/SpinBox")
-follow_target_selectable = NodePath("LinesContainer/MovementContainer/VBoxContainer/TargetContainer/OptionButton")
-follow_speed = NodePath("LinesContainer/MovementContainer/VBoxContainer/SpeedContainer/SpinBox")
+follow_target_selectable = NodePath("LinesContainer/FollowContainer/VBoxContainer/TargetContainer/OptionButton")
+follow_speed = NodePath("LinesContainer/FollowContainer/VBoxContainer/SpeedContainer/SpinBox")
+zoom_speed = NodePath("LinesContainer/ZoomContainer/VBoxContainer/ZoomSpeedContainer/SpinBox")
+zoom_ammount = NodePath("LinesContainer/ZoomContainer/VBoxContainer/ZoomAmmountContainer/SpinBox")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -71,41 +73,80 @@ text = "Fade"
 layout_mode = 2
 text = "Start Shake"
 
-[node name="MovementContainer" type="FoldableContainer" parent="LinesContainer"]
+[node name="FollowContainer" type="FoldableContainer" parent="LinesContainer"]
 layout_mode = 2
-title = "Movement"
+title = "Follow"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/MovementContainer"]
-layout_mode = 2
-
-[node name="FollowLabel" type="Label" parent="LinesContainer/MovementContainer/VBoxContainer"]
-layout_mode = 2
-text = "Follow"
-
-[node name="SpeedContainer" type="HBoxContainer" parent="LinesContainer/MovementContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/FollowContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LinesContainer/MovementContainer/VBoxContainer/SpeedContainer"]
+[node name="SpeedContainer" type="HBoxContainer" parent="LinesContainer/FollowContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LinesContainer/FollowContainer/VBoxContainer/SpeedContainer"]
 layout_mode = 2
 text = "Speed"
 
-[node name="SpinBox" type="SpinBox" parent="LinesContainer/MovementContainer/VBoxContainer/SpeedContainer"]
+[node name="SpinBox" type="SpinBox" parent="LinesContainer/FollowContainer/VBoxContainer/SpeedContainer"]
 layout_mode = 2
 step = 0.001
 page = 0.05
 value = 1.0
 script = SubResource("GDScript_0cley")
 
-[node name="TargetContainer" type="HBoxContainer" parent="LinesContainer/MovementContainer/VBoxContainer"]
+[node name="TargetContainer" type="HBoxContainer" parent="LinesContainer/FollowContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="LinesContainer/MovementContainer/VBoxContainer/TargetContainer"]
+[node name="Label" type="Label" parent="LinesContainer/FollowContainer/VBoxContainer/TargetContainer"]
 layout_mode = 2
 text = "Target"
 
-[node name="OptionButton" type="OptionButton" parent="LinesContainer/MovementContainer/VBoxContainer/TargetContainer"]
+[node name="OptionButton" type="OptionButton" parent="LinesContainer/FollowContainer/VBoxContainer/TargetContainer"]
 layout_mode = 2
 
+[node name="HSeparator" type="HSeparator" parent="LinesContainer/FollowContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ZoomContainer" type="FoldableContainer" parent="LinesContainer"]
+layout_mode = 2
+title = "Zoom"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/ZoomContainer"]
+layout_mode = 2
+
+[node name="ZoomSpeedContainer" type="HBoxContainer" parent="LinesContainer/ZoomContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LinesContainer/ZoomContainer/VBoxContainer/ZoomSpeedContainer"]
+layout_mode = 2
+text = "Speed"
+
+[node name="SpinBox" type="SpinBox" parent="LinesContainer/ZoomContainer/VBoxContainer/ZoomSpeedContainer"]
+layout_mode = 2
+step = 0.001
+page = 0.5
+value = 1.0
+custom_arrow_step = 0.5
+
+[node name="ZoomAmmountContainer" type="HBoxContainer" parent="LinesContainer/ZoomContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LinesContainer/ZoomContainer/VBoxContainer/ZoomAmmountContainer"]
+layout_mode = 2
+text = "Ammount"
+
+[node name="SpinBox" type="SpinBox" parent="LinesContainer/ZoomContainer/VBoxContainer/ZoomAmmountContainer"]
+layout_mode = 2
+step = 0.001
+page = 0.5
+value = 1.0
+custom_arrow_step = 0.5
+
+[node name="ApplyZoomButton" type="Button" parent="LinesContainer/ZoomContainer/VBoxContainer"]
+layout_mode = 2
+text = "Apply Zoom"
+
 [connection signal="pressed" from="LinesContainer/ShakeContainer/VBoxContainer/StartShakeButton" to="." method="_on_start_shake_button_pressed"]
-[connection signal="value_changed" from="LinesContainer/MovementContainer/VBoxContainer/SpeedContainer/SpinBox" to="." method="_on_follow_speed_value_changed"]
-[connection signal="item_selected" from="LinesContainer/MovementContainer/VBoxContainer/TargetContainer/OptionButton" to="." method="_on_follow_target_selected"]
+[connection signal="value_changed" from="LinesContainer/FollowContainer/VBoxContainer/SpeedContainer/SpinBox" to="." method="_on_follow_speed_value_changed"]
+[connection signal="item_selected" from="LinesContainer/FollowContainer/VBoxContainer/TargetContainer/OptionButton" to="." method="_on_follow_target_selected"]
+[connection signal="pressed" from="LinesContainer/ZoomContainer/VBoxContainer/ApplyZoomButton" to="." method="_on_apply_zoom_button_pressed"]

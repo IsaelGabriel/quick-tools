@@ -24,6 +24,12 @@ var _follow_speed: float = 1.0
 var _following: bool = false
 #endregion
 
+#region ZOOM
+var _zoom_target: float = 1.0
+var _zoom_speed: float = 1.0
+var _zooming: bool = false
+#endregion
+
 func _ready() -> void:
 	if get_viewport().get_camera_2d() == self:
 		main_camera = self
@@ -36,6 +42,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_process_shake()
 	_process_follow(delta)
+	_process_zoom(delta)
 
 func _exit_tree() -> void:
 	if get_viewport().get_camera_2d() == self:
@@ -105,4 +112,26 @@ func _process_follow(delta: float) -> void:
 	
 	global_position = lerp(global_position, _follow_target.global_position, delta * _follow_speed)
 	
+#endregion
+
+#region ZOOM
+func _process_zoom(delta: float) -> void:
+	if not _zooming: 
+		return
+	if zoom.x != _zoom_target:
+		zoom.x = lerpf(zoom.x, _zoom_target, delta * _zoom_speed)
+	if zoom.y != _zoom_target:
+		zoom.y = lerpf(zoom.y, _zoom_target, delta * _zoom_speed)
+	if zoom.x == zoom.y and zoom.x == _zoom_target:
+		_zooming = false
+
+func start_zoom_transition(ammount: float, speed: float = 1.0):
+	_zooming = true
+	_zoom_target = ammount
+	_zoom_speed = speed
+	
+static func main_camera_start_zoom_transition(ammount: float, speed: float = 1.0):
+	if not main_camera:
+		return
+	main_camera.start_zoom_transition(ammount, speed)
 #endregion

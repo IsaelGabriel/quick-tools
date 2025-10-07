@@ -5,11 +5,15 @@ extends Node
 @export var shake_strength: SpinBox
 @export var shake_duration: SpinBox
 
-@export_category("Movement")
+@export_category("Pan")
 @export_subgroup("Follow")
 @export var follow_target_selectable: OptionButton
 @export var follow_speed: SpinBox
 var targetable_nodes: Array[Node2D] = []
+
+@export_subgroup("Zoom")
+@export var zoom_speed: SpinBox
+@export var zoom_ammount: SpinBox
 
 var current_scene: Node
 
@@ -62,3 +66,7 @@ func _on_follow_target_selected(index: int) -> void:
 func _on_follow_speed_value_changed(value: float) -> void:
 	if follow_target_selectable.selected != 0:
 		QuickCamera2D.main_camera_start_follow(targetable_nodes.get(follow_target_selectable.selected - 1), value)
+
+
+func _on_apply_zoom_button_pressed() -> void:
+	QuickCamera2D.main_camera_start_zoom_transition(zoom_ammount.value, zoom_speed.value)
