@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://die30vybygnar"]
+
+[ext_resource type="Script" uid="uid://di45ryww68w4o" path="res://addons/quicktools/scripts/camera/camera_tester.gd" id="1_0cley"]
+
+[node name="CameraTester" type="CanvasLayer"]
+script = ExtResource("1_0cley")
+
+[node name="LinesContainer" type="VBoxContainer" parent="."]
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 119.0
+offset_bottom = 90.0
+
+[node name="Label" type="Label" parent="LinesContainer"]
+layout_mode = 2
+text = "Camera Tester"
+
+[node name="StartShakeButton" type="Button" parent="LinesContainer"]
+layout_mode = 2
+text = "Start Shake"
+
+[connection signal="pressed" from="LinesContainer/StartShakeButton" to="." method="_on_start_shake_button_pressed"]

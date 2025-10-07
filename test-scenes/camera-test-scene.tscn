@@ -10,3 +10,4 @@ texture = ExtResource("1_swdpb")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_lkja7")
+camera_test_ui = true
