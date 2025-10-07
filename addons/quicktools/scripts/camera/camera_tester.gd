@@ -1,25 +1,30 @@
 extends Node
 
 @export_category("Shake")
-@export var fade_toggle: CheckButton
-@export var strength_text: LineEdit
-@export var duration_text: LineEdit
+@export var shake_fade_toggle: CheckButton
+@export var shake_strength: SpinBox
+@export var shake_duration: SpinBox
 
 @export_category("Movement")
 @export_subgroup("Follow")
-@export var target_selectable: OptionButton
+@export var follow_target_selectable: OptionButton
+@export var follow_speed: SpinBox
 var targetable_nodes: Array[Node2D] = []
 
 func _ready():
 	_fetch_2d_nodes()
 
 func _fetch_2d_nodes() -> void:
+	targetable_nodes = []
+	follow_target_selectable.clear()
+	follow_target_selectable.add_item("< null >")
+	
 	var current_scene = get_tree().current_scene
 	var nodes: Array[Node] = _get_nodes_in_scene(current_scene)
 	for node in nodes:
 		if node is Node2D:
 			targetable_nodes.append(node)
-			target_selectable.add_item(current_scene.get_path_to(node))
+			follow_target_selectable.add_item(current_scene.get_path_to(node))
 
 func _get_nodes_in_scene(scene:Node) -> Array[Node]:
 	var nodes: Array[Node] = []
@@ -30,16 +35,14 @@ func _get_nodes_in_scene(scene:Node) -> Array[Node]:
 	return nodes
 
 func _on_start_shake_button_pressed() -> void:
-	var strength: float = 30.0
-	var duration: float = 1.0
-	if strength_text.text.is_valid_float() and not strength_text.text.is_empty():
-		strength = strength_text.text.to_float()
-	else:
-		strength_text.text = ''
-		
-	if duration_text.text.is_valid_float() and not duration_text.text.is_empty():
-		duration = duration_text.text.to_float()
-	else:
-		duration_text.text = ''
+	var strength: float = shake_strength.value
+	var duration: float = shake_duration.value
 	
-	QuickCamera2D.main_camera_start_shake(strength, duration, fade_toggle.toggle_mode)
+	QuickCamera2D.main_camera_start_shake(strength, duration, shake_fade_toggle.toggle_mode)
+
+
+func _on_follow_target_selected(index: int) -> void:
+	if index == 0:
+		QuickCamera2D.main_camera_stop_follow()
+	else:
+		QuickCamera2D.main_camera_start_follow(targetable_nodes.get(index - 1), follow_speed.value)

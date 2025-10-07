@@ -1,14 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://cunwifo2l87tp"]
+[gd_scene load_steps=4 format=3 uid="uid://cunwifo2l87tp"]
 
 [ext_resource type="Texture2D" uid="uid://b3gx3a7ie2hhq" path="res://icon.svg" id="1_swdpb"]
+[ext_resource type="Script" uid="uid://b5phhe7ca6457" path="res://test-scenes/scripts/movable.gd" id="2_eqxo5"]
 [ext_resource type="Script" uid="uid://cettrq0c4flq" path="res://addons/quicktools/scripts/camera/quick_camera_2d.gd" id="2_lkja7"]
 
 [node name="CameraTestScene" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_swdpb")
+script = ExtResource("2_eqxo5")
 
 [node name="Node2D" type="Node2D" parent="Sprite2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_lkja7")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(-372, 56)
+texture = ExtResource("1_swdpb")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(-183, -169)
+texture = ExtResource("1_swdpb")
+
+[node name="Icon3" type="Sprite2D" parent="."]
+position = Vector2(-144, 242)
+texture = ExtResource("1_swdpb")
