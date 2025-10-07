@@ -27,7 +27,7 @@ text = "Strength"
 
 [node name="LineEdit" type="LineEdit" parent="LinesContainer/StrengthContainer"]
 layout_mode = 2
-placeholder_text = "350.0"
+placeholder_text = "30.0"
 alignment = 1
 max_length = 5
 context_menu_enabled = false
@@ -46,7 +46,7 @@ text = "Duration (s)"
 
 [node name="LineEdit" type="LineEdit" parent="LinesContainer/DurationContainer"]
 layout_mode = 2
-placeholder_text = "2.0"
+placeholder_text = "1.0"
 alignment = 1
 max_length = 5
 context_menu_enabled = false
