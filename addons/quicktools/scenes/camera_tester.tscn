@@ -2,11 +2,12 @@
 
 [ext_resource type="Script" uid="uid://di45ryww68w4o" path="res://addons/quicktools/scripts/camera/camera_tester.gd" id="1_0cley"]
 
-[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("fade_toggle", "strength_text", "duration_text")]
+[node name="CameraTester" type="CanvasLayer" node_paths=PackedStringArray("fade_toggle", "strength_text", "duration_text", "target_selectable")]
 script = ExtResource("1_0cley")
 fade_toggle = NodePath("LinesContainer/ShakeContainer/VBoxContainer/FadeToggle")
 strength_text = NodePath("LinesContainer/ShakeContainer/VBoxContainer/StrengthContainer/LineEdit")
 duration_text = NodePath("LinesContainer/ShakeContainer/VBoxContainer/DurationContainer/LineEdit")
+target_selectable = NodePath("LinesContainer/MovementContainer/VBoxContainer/TargetContainer/OptionButton")
 
 [node name="LinesContainer" type="VBoxContainer" parent="."]
 offset_left = 6.0
@@ -20,9 +21,11 @@ text = "Camera Tester"
 
 [node name="ShakeContainer" type="FoldableContainer" parent="LinesContainer"]
 layout_mode = 2
+folded = true
 title = "Shake"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/ShakeContainer"]
+visible = false
 layout_mode = 2
 
 [node name="StrengthContainer" type="HBoxContainer" parent="LinesContainer/ShakeContainer/VBoxContainer"]
@@ -70,5 +73,25 @@ text = "Fade"
 [node name="StartShakeButton" type="Button" parent="LinesContainer/ShakeContainer/VBoxContainer"]
 layout_mode = 2
 text = "Start Shake"
+
+[node name="MovementContainer" type="FoldableContainer" parent="LinesContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LinesContainer/MovementContainer"]
+layout_mode = 2
+
+[node name="FollowLabel" type="Label" parent="LinesContainer/MovementContainer/VBoxContainer"]
+layout_mode = 2
+text = "Follow"
+
+[node name="TargetContainer" type="HBoxContainer" parent="LinesContainer/MovementContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LinesContainer/MovementContainer/VBoxContainer/TargetContainer"]
+layout_mode = 2
+text = "Target"
+
+[node name="OptionButton" type="OptionButton" parent="LinesContainer/MovementContainer/VBoxContainer/TargetContainer"]
+layout_mode = 2
 
 [connection signal="pressed" from="LinesContainer/ShakeContainer/VBoxContainer/StartShakeButton" to="." method="_on_start_shake_button_pressed"]

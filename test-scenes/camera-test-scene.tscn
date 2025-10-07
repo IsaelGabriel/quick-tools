@@ -8,5 +8,7 @@
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_swdpb")
 
+[node name="Node2D" type="Node2D" parent="Sprite2D"]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("2_lkja7")
